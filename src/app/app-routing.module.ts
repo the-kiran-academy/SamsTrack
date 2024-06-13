@@ -6,6 +6,8 @@ import { LoginComponent } from './components/login/login.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
+import { AddSubjectComponent } from './components/add-subject/add-subject.component';
+import { SubjectListComponent } from './components/subject-list/subject-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -31,6 +33,15 @@ const routes: Routes = [
     path: 'add-user',
     component: AddUserComponent,
   },
+  {
+    path:'add-subject',
+    component:AddSubjectComponent
+  },
+  {
+    path:'get-all-subject',
+    component:SubjectListComponent
+
+  }
 ];
 
 @NgModule({

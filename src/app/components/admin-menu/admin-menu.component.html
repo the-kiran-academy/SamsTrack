@@ -10,16 +10,16 @@
           <a class="nav-link text-white active" aria-current="page" routerLink="/admin-dashboard">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/add-user">Add User</a>
+          <a class="nav-link text-white" [routerLink]="['/add-user']">Add User</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/get-all-user">All User</a>
+          <a class="nav-link text-white" [routerLink]="['/get-all-user']">All User</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Add Subject</a>
+          <a class="nav-link text-white" [routerLink]="['/add-subject']">Add Subject</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">All Subject</a>
+          <a class="nav-link text-white" [routerLink]="['/get-all-subject']">All Subject</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white" href="#">View Attendance</a>
