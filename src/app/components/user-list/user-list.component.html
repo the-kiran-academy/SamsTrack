@@ -1,0 +1,30 @@
+
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+
+      <tr>
+        <th scope="col">USERNAME</th>
+        <th scope="col">PASSWORD</th>
+        <th scope="col">FIRST NAME</th>
+
+        <th scope="col">LAST NAME</th>
+        <th scope="col">EMAIL</th>
+        <th scope="col">ROLE</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of users">
+        <td>{{u.username}}</td>
+        <td>{{u.password}}</td>
+        <td>{{u.firstName}}</td>
+        <td>{{u.lastName}}</td>
+        <td>{{u.email}}</td>
+        <td>{{u.role}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
