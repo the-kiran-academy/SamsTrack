@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { User } from '../models/user';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -11,13 +12,43 @@ export class AdminService {
 
   getAllUsers(): Observable<any[]> {
     const url = 'http://localhost:8091/user/get-all-user';
-    return this.http.get<any[]>(url);
+    return this.http.get<any[]>(url).pipe(
+      catchError(this.handleError)
+    );
   }
 
   addUser(user: User): Observable<any> {
     console.log('in service : ', user);
 
     const postUrl = 'http://localhost:8091/user/register-user';
-    return this.http.post<User>(postUrl, user);
+    return this.http.post<User>(postUrl, user).pipe(
+      catchError(this.handleError)
+    );
   }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMessage = 'An unknown error occurred!';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      errorMessage = `Client-side error: ${error.error.message}`;
+      console.log("client side error");
+
+    } else {
+      console.log("client side error");
+
+      // Server-side error
+      if (error.status === 0) {
+        console.log("client side error  0");
+
+        // Network error
+        errorMessage = 'Cannot connect to the server. Please try again later.';
+      } else {
+        console.log("client side error 500");
+
+        errorMessage = `Server-side error: ${error.status} - ${error.message}`;
+      }
+    }
+    return throwError(errorMessage);
+  }
+
 }

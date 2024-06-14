@@ -11,21 +11,29 @@ export class LoginComponent {
   username: string | undefined;
   password: string | undefined;
 
-  constructor(private service: LoginService, private router:Router) {}
+  constructor(private service: LoginService, private router: Router) {}
 
-
-
+  error: string | null = null;
   login() {
-    if(this.username && this.password){
-      this.service.loginUser(this.username,this.password).subscribe(response =>{
-        if(response.role==='admin'){
-          console.log("ts ",response)
-          this.router.navigate(['/admin-dashboard'])
-        }else{
-        this.router.navigate(['/user-dashboard']);
-        }
+    if (this.username && this.password) {
+      this.service.loginUser(this.username, this.password).subscribe(
+        (response) => {
+          if (response.role === 'admin') {
+            console.log('ts ', response);
+            this.error = null;
+            this.router.navigate(['/admin-dashboard']);
+          } else {
+            this.router.navigate(['/user-dashboard']);
+          }
+        },
+        (error) => {
+          // Handle error response
+          this.error = error; // Extract specific error message
+          console.log("my error ",error);
 
-      });
+          alert(error);
+        }
+      );
     }
   }
 }
