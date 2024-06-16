@@ -12,7 +12,7 @@ export class UserMenuComponent {
   constructor(private loginService:LoginService,private router:Router){}
 
   logout() {
-    this.loginService.setRole('');
+    localStorage.getItem('');
     this.router.navigate(['']);
   }
 

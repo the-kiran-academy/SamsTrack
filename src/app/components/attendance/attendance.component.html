@@ -1,1 +1,41 @@
-<p>attendance works!</p>
+<div class="container">
+  <div *ngIf="role === 'admin'">
+    <app-admin-menu></app-admin-menu>
+  </div>
+  <div *ngIf="role === 'user'">
+    <app-user-menu></app-user-menu>
+  </div>
+
+  <div *ngIf="students.length > 0">
+    <form (ngSubmit)="submitAttendance()">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Attendance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students">
+            <!-- Hide the ID cell -->
+            <td>
+              {{ student.name }}
+            </td>
+
+            <td>
+              <input
+                type="checkbox"
+                [(ngModel)]="student.id"
+                [value]="student.id"
+                name="id"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="submit" class="btn btn-primary">Submit Attendance</button>
+    </form>
+  </div>
+  <div *ngIf="students.length === 0">No students available.</div>
+
+</div>

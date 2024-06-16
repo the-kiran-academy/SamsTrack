@@ -7,16 +7,9 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class LoginService {
-  private roleSubject = new BehaviorSubject<string>('');
-  role$ = this.roleSubject.asObservable();
 
-  setRole(role: string): void {
-    this.roleSubject.next(role);
-  }
 
-  getRole(): string {
-    return this.roleSubject.value;
-  }
+
 
   constructor(private http: HttpClient) {}
 

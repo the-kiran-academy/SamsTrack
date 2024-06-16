@@ -16,7 +16,7 @@ role!:string;
 
 
   ngOnInit() {
-    this.role=this.loginService.getRole();
+    this.role= String(localStorage.getItem('role'));
     this.adminService.getAllUsers().subscribe((list) => {
       this.users = list;
       if (this.users.length===0) {

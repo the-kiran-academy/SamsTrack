@@ -19,13 +19,16 @@ export class LoginComponent {
       this.service.loginUser(this.username, this.password).subscribe(
         (response) => {
           if (response.role === 'admin') {
-            this.service.setRole("admin");
             this.error = null;
             this.router.navigate(['/admin-dashboard']);
-          } else {
-            this.service.setRole("user");
+          } else if (response.role === 'user'){
+
             this.router.navigate(['/user-dashboard']);
+          }else{
+            this.router.navigate(['']);
           }
+          localStorage.setItem('role',response.role);
+
         },
         (error) => {
           // Handle error response

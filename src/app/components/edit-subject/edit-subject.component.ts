@@ -33,8 +33,7 @@ export class EditSubjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.role = this.loginService.getRole();
-
+     this.role= String(localStorage.getItem('role'));
     this.routerId = +this.route.snapshot.paramMap.get('id')!; //Using Non-null Assertion Operator
 
     this.subjectService.getSubjectById(this.routerId).subscribe((response) => {

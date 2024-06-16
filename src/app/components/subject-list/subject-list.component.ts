@@ -11,10 +11,10 @@ export class SubjectListComponent {
   role!:string;
   subjects: any[] = [];
 
-  constructor(private subjectService: SubjectService,private loginService:LoginService) {}
+  constructor(private subjectService: SubjectService) {}
 
   ngOnInit() {
-    this.role=this.loginService.getRole();
+    this.role= String(localStorage.getItem('role'));
     this.subjectService.getAllSubject().subscribe((response) => {
       this.subjects = response;
     });

@@ -11,13 +11,14 @@ import { SubjectService } from 'src/app/services/subject.service';
   styleUrls: ['./add-subject.component.css']
 })
 export class AddSubjectComponent {
-role!:string;
+
 
   subject!: Subject;
 
   myForm: FormGroup;
+  role!: string;
 
-  constructor(private subjectService: SubjectService,private loginService:LoginService, private router: Router) {
+  constructor(private subjectService: SubjectService, private router: Router) {
     this.myForm = new FormGroup({
       id: new FormControl(),
       name: new FormControl(),
@@ -25,7 +26,7 @@ role!:string;
   }
 
   ngOnInit(): void {
-    this.role = this.loginService.getRole();
+    this.role= String(localStorage.getItem('role'));
   }
 
   onSubmit() {

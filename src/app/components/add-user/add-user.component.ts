@@ -11,13 +11,13 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent {
-  role!:string;
 
   user!: User;
 
   myForm: FormGroup;
+  role!: string;
 
-  constructor(private adminService: AdminService,private loginService:LoginService, private router: Router) {
+  constructor(private adminService: AdminService,private router: Router) {
     this.myForm = new FormGroup({
       username: new FormControl(),
       password: new FormControl(),
@@ -29,7 +29,7 @@ export class AddUserComponent {
   }
 
   ngOnInit(): void {
-    this.role = this.loginService.getRole();
+    this.role= String(localStorage.getItem('role'));
   }
 
   onSubmit() {
