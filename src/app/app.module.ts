@@ -16,6 +16,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { AddSubjectComponent } from './components/add-subject/add-subject.component';
 import { SubjectListComponent } from './components/subject-list/subject-list.component';
+import { EditSubjectComponent } from './components/edit-subject/edit-subject.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SubjectListComponent } from './components/subject-list/subject-list.com
     UserListComponent,
     AddUserComponent,
     AddSubjectComponent,
-    SubjectListComponent
+    SubjectListComponent,
+    EditSubjectComponent
 
   ],
   imports: [

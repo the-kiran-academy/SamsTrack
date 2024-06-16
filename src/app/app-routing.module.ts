@@ -8,6 +8,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { AddSubjectComponent } from './components/add-subject/add-subject.component';
 import { SubjectListComponent } from './components/subject-list/subject-list.component';
+import { EditSubjectComponent } from './components/edit-subject/edit-subject.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -34,13 +35,16 @@ const routes: Routes = [
     component: AddUserComponent,
   },
   {
-    path:'add-subject',
-    component:AddSubjectComponent
+    path: 'add-subject',
+    component: AddSubjectComponent,
   },
   {
-    path:'get-all-subject',
-    component:SubjectListComponent
-
+    path: 'get-all-subject',
+    component: SubjectListComponent,
+  },
+  {
+    path:'get-subject-by-id/:id',
+    component: EditSubjectComponent
   }
 ];
 

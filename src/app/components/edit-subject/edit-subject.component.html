@@ -1,9 +1,10 @@
+
 <app-admin-menu></app-admin-menu>
 <div class="container register">
   <div class="row">
     <div class="col-md-3 register-left">
       <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
-      <h3>Welcome</h3>
+      <h3>Welcome </h3>
       <p>You are 30 seconds away from earning your own money!</p>
     </div>
     <div class="col-md-9 register-right">
@@ -14,8 +15,8 @@
           role="tabpanel"
           aria-labelledby="home-tab"
         >
-          <h3 class="register-heading">Add Subject</h3>
-          <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+          <h3 class="register-heading">Edit Subject - ID = {{subjectId}}</h3>
+          <form [formGroup]='myForm' (ngSubmit)="onSubmit()">
             <div class="row register-form">
               <div class="col-md-12">
 
@@ -23,15 +24,33 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="name"
+                    id="subjectId"
+                    [(ngModel)]="subjectId"
                     required
-                    name="name"
-                    placeholder="Enter Subject Name *"
-                    formControlName="name"
+                    readonly
+                    name="subjectId"
+                    formControlName="id"
+
                   />
                 </div>
-                <input type="submit" class="btnRegister" value="Add Subject" />
+
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="subjectName"
+                    required
+                    name="subjectName"
+                    [(ngModel)]="subjectName"
+                    placeholder="Enter Subject Name To Update *"
+                    formControlName="name"
+                    value="{{subjectName}}"
+                  />
+                </div>
+                <input type="submit" class="btnRegister" value="Update Subject" />
+
               </div>
+
             </div>
           </form>
         </div>

@@ -13,4 +13,21 @@ export class SubjectService {
     const url = 'http://localhost:8091/subject/add-subject';
     return this.http.post(url, subject);
   }
+
+  getAllSubject(): Observable<any> {
+    const url = 'http://localhost:8091/subject/get-all-subjects';
+    return this.http.get(url);
+  }
+
+
+  getSubjectById(id:number):Observable<any>{
+    const url='http://localhost:8091/subject/get-subject-by-id';
+    return this.http.get(`${url}/${id}`);
+  }
+
+  updateSubject(subject: Subject): Observable<any> {
+    const url = 'http://localhost:8091/subject/update-subject';
+    return this.http.put(url, subject);
+  }
+
 }

@@ -21,26 +21,22 @@ export class LoginService {
     );
 
   }
-  private handleError(error: HttpErrorResponse): Observable<never> {
+  private handleError(httpErrorResponse: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
-    if (error.error instanceof ErrorEvent) {
+    if (httpErrorResponse.error instanceof ErrorEvent) {
       // Client-side error
-      errorMessage = `Client-side error: ${error.error.message}`;
+      errorMessage = `Client-side error: ${httpErrorResponse.error.message}`;
       console.log("client side error");
 
     } else {
-      console.log("client side error");
-
       // Server-side error
-      if (error.status === 0) {
-        console.log("client side error  0");
-
+      if (httpErrorResponse.status === 0) {
         // Network error
         errorMessage = 'Server Down. Please try again later.';
       } else {
-        console.log("client side error 500");
+        console.log("server side error 500",httpErrorResponse);
 
-        errorMessage = `Server-side error: ${error.status} - ${error.message}`;
+        errorMessage = `Server-side error: ${httpErrorResponse.status} - ${httpErrorResponse.error.message}`;
       }
     }
     return throwError(errorMessage);
