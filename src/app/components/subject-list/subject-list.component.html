@@ -1,4 +1,9 @@
-<app-admin-menu></app-admin-menu>
+<div *ngIf="role === 'admin'">
+  <app-admin-menu></app-admin-menu>
+</div>
+<div *ngIf="role === 'user'">
+  <app-user-menu></app-user-menu>
+</div>
 <div class="container">
   <table class="table table-striped table-bordered">
     <thead>

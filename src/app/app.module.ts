@@ -17,6 +17,8 @@ import { AddUserComponent } from './components/add-user/add-user.component';
 import { AddSubjectComponent } from './components/add-subject/add-subject.component';
 import { SubjectListComponent } from './components/subject-list/subject-list.component';
 import { EditSubjectComponent } from './components/edit-subject/edit-subject.component';
+import { AttendanceComponent } from './components/attendance/attendance.component';
+import { ViewAttendanceComponent } from './components/view-attendance/view-attendance.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { EditSubjectComponent } from './components/edit-subject/edit-subject.com
     AddUserComponent,
     AddSubjectComponent,
     SubjectListComponent,
-    EditSubjectComponent
+    EditSubjectComponent,
+    AttendanceComponent,
+    ViewAttendanceComponent
 
   ],
   imports: [

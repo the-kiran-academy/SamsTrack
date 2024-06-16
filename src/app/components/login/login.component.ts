@@ -19,10 +19,11 @@ export class LoginComponent {
       this.service.loginUser(this.username, this.password).subscribe(
         (response) => {
           if (response.role === 'admin') {
-            console.log('ts ', response);
+            this.service.setRole("admin");
             this.error = null;
             this.router.navigate(['/admin-dashboard']);
           } else {
+            this.service.setRole("user");
             this.router.navigate(['/user-dashboard']);
           }
         },

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'src/app/models/subject';
+import { LoginService } from 'src/app/services/login.service';
 import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
@@ -10,15 +11,21 @@ import { SubjectService } from 'src/app/services/subject.service';
   styleUrls: ['./add-subject.component.css']
 })
 export class AddSubjectComponent {
+role!:string;
+
   subject!: Subject;
 
   myForm: FormGroup;
 
-  constructor(private subjectService: SubjectService, private router: Router) {
+  constructor(private subjectService: SubjectService,private loginService:LoginService, private router: Router) {
     this.myForm = new FormGroup({
       id: new FormControl(),
       name: new FormControl(),
     });
+  }
+
+  ngOnInit(): void {
+    this.role = this.loginService.getRole();
   }
 
   onSubmit() {

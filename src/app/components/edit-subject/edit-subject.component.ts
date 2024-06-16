@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
@@ -9,6 +10,8 @@ import { SubjectService } from 'src/app/services/subject.service';
   styleUrls: ['./edit-subject.component.css'],
 })
 export class EditSubjectComponent implements OnInit {
+  role!: string;
+
   myForm!: FormGroup<any>;
 
   routerId!: number;
@@ -17,12 +20,11 @@ export class EditSubjectComponent implements OnInit {
 
   subjectName!: string;
 
-
-
   constructor(
     private route: ActivatedRoute,
     private subjectService: SubjectService,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {
     this.myForm = new FormGroup({
       id: new FormControl(),
@@ -31,6 +33,8 @@ export class EditSubjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.role = this.loginService.getRole();
+
     this.routerId = +this.route.snapshot.paramMap.get('id')!; //Using Non-null Assertion Operator
 
     this.subjectService.getSubjectById(this.routerId).subscribe((response) => {
@@ -40,7 +44,7 @@ export class EditSubjectComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("on submit ",this.myForm.value);
+    console.log('on submit ', this.myForm.value);
 
     this.subjectService
       .updateSubject(this.myForm.value)

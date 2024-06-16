@@ -3,6 +3,7 @@ import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AdminService } from 'src/app/services/admin.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-add-user',
@@ -10,11 +11,13 @@ import { AdminService } from 'src/app/services/admin.service';
   styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent {
+  role!:string;
+
   user!: User;
 
   myForm: FormGroup;
 
-  constructor(private adminService: AdminService, private router: Router) {
+  constructor(private adminService: AdminService,private loginService:LoginService, private router: Router) {
     this.myForm = new FormGroup({
       username: new FormControl(),
       password: new FormControl(),
@@ -23,6 +26,10 @@ export class AddUserComponent {
       lastName: new FormControl(),
       role: new FormControl(),
     });
+  }
+
+  ngOnInit(): void {
+    this.role = this.loginService.getRole();
   }
 
   onSubmit() {

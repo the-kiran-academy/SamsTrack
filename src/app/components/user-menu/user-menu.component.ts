@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-user-menu',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-menu.component.css']
 })
 export class UserMenuComponent {
+
+  constructor(private loginService:LoginService,private router:Router){}
+
+  logout() {
+    this.loginService.setRole('');
+    this.router.navigate(['']);
+  }
 
 }

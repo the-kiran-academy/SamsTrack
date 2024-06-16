@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-user-list',
@@ -8,11 +9,14 @@ import { AdminService } from 'src/app/services/admin.service';
   styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent {
-  constructor(private adminService: AdminService, private router: Router) {}
+role!:string;
+  users: any[] = [];
+  constructor(private adminService: AdminService, private router: Router,private loginService:LoginService) {}
 
-   users: any[] = [];
+
 
   ngOnInit() {
+    this.role=this.loginService.getRole();
     this.adminService.getAllUsers().subscribe((list) => {
       this.users = list;
       if (this.users.length===0) {
