@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AttendanceRecord } from 'src/app/models/attendance-record';
 import { Faculty } from 'src/app/models/faculty';
 import { Student } from 'src/app/models/student';
 import { Subject } from 'src/app/models/subject';
+import { User } from 'src/app/models/user';
+import { AdminService } from 'src/app/services/admin.service';
 import { AttendanceService } from 'src/app/services/attendance.service';
 import { FacultyService } from 'src/app/services/faculty.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -18,35 +21,20 @@ export class AttendanceComponent {
   role!: string;
 
   selectedIds: number[] = [];
-  selectedFaculty!: number;
+  selectedFaculty!: string;
   selectedSubject!: number;
   selectedDate!: string;
   selectedTime!: string;
-  numberOfStudents!:number;
+  numberOfStudents!: number;
 
-  faculties: Faculty[] = [];
+  facultyUser: User[] = [];
   subjects: Subject[] = [];
-
-  submitAttendance() {
-    this.selectedIds = this.students
-      .filter((student) => student.isSelected)
-      .map((student) => student.id);
-
-      this.numberOfStudents=this.selectedIds.length;
-
-    console.log('ids ', this.selectedIds);
-    console.log('subject subject id ', this.selectedSubject);
-    console.log('selected faculty id ', this.selectedFaculty);
-    console.log("selected date ",this.selectedDate);
-    console.log('selected time ',this.selectedTime);
-    console.log('number of students ',this.numberOfStudents);
-
-  }
 
   constructor(
     private attendanceService: AttendanceService,
     private subjectService: SubjectService,
-    private facultyService: FacultyService
+    private adminService: AdminService,
+    private router:Router
   ) {}
 
   getAllSubjects() {
@@ -56,8 +44,8 @@ export class AttendanceComponent {
   }
 
   getAllFaculty() {
-    this.facultyService.getAllFaculty().subscribe((response) => {
-      this.faculties = response;
+    this.adminService.getAllFaculties().subscribe((response) => {
+      this.facultyUser = response;
     });
   }
 
@@ -82,7 +70,7 @@ export class AttendanceComponent {
 
   onFacultyChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
-    this.selectedFaculty = Number(selectElement.value);
+    this.selectedFaculty = String(selectElement.value);
   }
   onTimeChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
@@ -92,5 +80,33 @@ export class AttendanceComponent {
   onDateChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     this.selectedDate = inputElement.value;
+  }
+
+  submitAttendance() {
+    this.selectedIds = this.students
+      .filter((student) => student.isSelected)
+      .map((student) => student.id);
+
+    this.numberOfStudents = this.selectedIds.length;
+
+    const attendanceRecord: AttendanceRecord = {
+      username: this.selectedFaculty,
+      subjectId: this.selectedSubject,
+      date: this.selectedDate,
+      time: this.selectedTime,
+      numberOfStudents: this.numberOfStudents,
+      studentIds: this.selectedIds,
+    };
+
+    console.log(attendanceRecord);
+
+    this.attendanceService.submitAttendance(attendanceRecord).subscribe((response)=>{
+      if(response!=null){
+        alert('Attendance Submitted');
+      }else{
+        alert('Something went wrong');
+      }
+      this.router.navigate(['view-attendance']);
+    });
   }
 }

@@ -21,7 +21,7 @@ export class LoginComponent {
           if (response.role === 'admin') {
             this.error = null;
             this.router.navigate(['/admin-dashboard']);
-          } else if (response.role === 'user'){
+          } else if (response.role === 'faculty'){
 
             this.router.navigate(['/user-dashboard']);
           }else{

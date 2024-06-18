@@ -17,6 +17,22 @@ export class AdminService {
     );
   }
 
+  getAllAdmins(): Observable<any[]> {
+    const url = 'http://localhost:8091/user/get-all-admin';
+    return this.http.get<any[]>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getAllFaculties(): Observable<any[]> {
+    const url = 'http://localhost:8091/user/get-all-faculty';
+    return this.http.get<any[]>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+
   addUser(user: User): Observable<any> {
     console.log('in service : ', user);
 

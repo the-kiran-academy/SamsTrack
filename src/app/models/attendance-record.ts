@@ -1,5 +1,5 @@
 export interface AttendanceRecord {
-  facultyId: number;
+  username: string;
   subjectId: number;
   date: string;
   time:string;
